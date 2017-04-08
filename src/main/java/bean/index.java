@@ -17,7 +17,7 @@ import model.Users;
 @RequestScoped
 public class index {
     private List<Users> lst = new ArrayList<>();
-    private String name;
+    private String name, email;
     
     public List<Users> getLst() {
         return lst;
@@ -34,6 +34,14 @@ public class index {
     public void setName(String name) {
         this.name = name;
     }
+    
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
        
     @PostConstruct
     public void init(){
@@ -43,6 +51,7 @@ public class index {
     public boolean save(){
         Users u = new Users();
         u.setName(name);
+        u.setEmail(email);
         
         try {
             new controller.UsersController().persist(u);            
