@@ -33,7 +33,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u"),
     @NamedQuery(name = "Users.findById", query = "SELECT u FROM Users u WHERE u.id = :id"),
-    @NamedQuery(name = "Users.findByName", query = "SELECT u FROM Users u WHERE u.name = :name")})
+    @NamedQuery(name = "Users.findByName", query = "SELECT u FROM Users u WHERE u.name = :name"),
+    @NamedQuery(name = "Users.findByEmail", query = "SELECT u FROM Users u WHERE u.email = :email")})
 public class Users implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
     private Collection<Services> servicesCollection;
@@ -46,6 +47,9 @@ public class Users implements Serializable {
     @Size(max = 200)
     @Column(name = "name")
     private String name;
+    @Size(max = 200)
+    @Column(name = "email")
+    private String email;
 
     public Users() {
     }
@@ -68,6 +72,14 @@ public class Users implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+    
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
